@@ -16,7 +16,7 @@
     document.getElementById("formulario").addEventListener("submit", async function(e) {
       e.preventDefault();
       const matricula = document.getElementById("inputMatricula").value.trim().toUpperCase();
-      const url = "https://script.google.com/macros/s/AKfycbwSP516t9HtXEPw3vgkQnY8Q506Pn5UYKtG0ptzeO-xPwbFjsQ6ZGcJMKPYeDKkBXumMA/exec?matriculas=" + encodeURIComponent(matricula); // ← cambia esta URL
+      const url = "https://script.google.com/macros/s/AKfycbw6V8adbECw1P4FtFXZmjO9PdDYiXevjLEHJpue9QSsFAZnYR2a7Mj5Pr4K0eRvX92XFA/exec?matriculas=" + encodeURIComponent(matricula); // ← cambia esta URL
       const respuesta = await fetch(url);
       const texto = await respuesta.text();
       document.getElementById("resultado").textContent = texto;
