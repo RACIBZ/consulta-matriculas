@@ -1,19 +1,114 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Consulta Matrículas</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    header {
+      width: 100%;
+      max-width: 480px;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    header img {
+      max-width: 200px;
+      height: auto;
+    }
+
+    main {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 480px;
+      margin-top: 1rem;
+    }
+
+    h2 {
+      text-align: center;
+      color: #004b80;
+      margin-bottom: 1.5rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    input[type="text"] {
+      padding: 0.75rem;
+      font-size: 1.1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-transform: uppercase;
+    }
+
+    button {
+      background-color: #004b80;
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      font-size: 1.1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #00365e;
+    }
+
+    #resultado {
+      margin-top: 1rem;
+      font-weight: bold;
+      text-align: center;
+      min-height: 1.5em;
+      color: #004b80;
+    }
+
+    @media (max-width: 500px) {
+      header img {
+        max-width: 150px;
+      }
+
+      main {
+        padding: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h2>Consultar Matrícula</h2>
-  <form id="formulario">
-    <input type="text" id="inputMatricula" placeholder="Introduce matrícula" required>
-    <button type="submit">Buscar</button>
-  </form>
-  <p id="resultado"></p>
+  <header>
+    <!-- Asegúrate de tener esta imagen en la misma carpeta o cambia la ruta si la alojas online -->
+    <img src="logo-consell.jpg" alt="Consell Insular de Eivissa" />
+  </header>
+
+  <main>
+    <h2>Consultar Matrícula</h2>
+    <form id="formulario">
+      <input type="text" id="inputMatricula" placeholder="Introduce matrícula" required />
+      <button type="submit">Buscar</button>
+    </form>
+    <p id="resultado"></p>
+  </main>
 
   <script>
-    document.getElementById("formulario").addEventListener("submit", async function(e) {
+    document.getElementById("formulario").addEventListener("submit", async function (e) {
       e.preventDefault();
 
       const matricula = document.getElementById("inputMatricula").value.trim().toUpperCase();
@@ -22,8 +117,9 @@
         return;
       }
 
-      // ⚠️ Sustituye esta URL por la tuya
-      const url = "https://script.google.com/macros/s/AKfycbytafbsV1kli381lRMofQgI5sSwrxQPWScRWwRr_tXznccYh0x3zLsqYkFoTEE1Tx4OoQ/exec?matricula=" + encodeURIComponent(matricula);
+      const url =
+        "https://script.google.com/macros/s/AKfycbytafbsV1kli381lRMofQgI5sSwrxQPWScRWwRr_tXznccYh0x3zLsqYkFoTEE1Tx4OoQ/exec?matricula=" +
+        encodeURIComponent(matricula);
 
       try {
         const response = await fetch(url);
