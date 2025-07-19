@@ -7,7 +7,7 @@
 <body>
   <h2>Consultar Matrícula</h2>
   <form id="formulario">
-    <input type="text" id="inputMatricula" placeholder="Introduce matrícula">
+    <input type="text" id="inputMatricula" placeholder="Introduce matrícula" required>
     <button type="submit">Buscar</button>
   </form>
   <p id="resultado"></p>
@@ -15,11 +15,25 @@
   <script>
     document.getElementById("formulario").addEventListener("submit", async function(e) {
       e.preventDefault();
+
       const matricula = document.getElementById("inputMatricula").value.trim().toUpperCase();
-      const url = "https://script.google.com/macros/s/AKfycby-lIBYy5VwX5bN8uUW4F58emTud1MEb22xQzbdHbuoI6HLuSQxcQkppUQh5TiTTnoLfw/exec?matriculas=" + encodeURIComponent(matriculas); // ← cambia esta URL
-      const respuesta = await fetch(url);
-      const texto = await respuesta.text();
-      document.getElementById("resultado").textContent = texto;
+      if (!matricula) {
+        document.getElementById("resultado").textContent = "Introduce una matrícula.";
+        return;
+      }
+
+      // ⚠️ Sustituye esta URL por la tuya
+      const url = "https://script.google.com/macros/s/AKfycby-lIBYy5VwX5bN8uUW4F58emTud1MEb22xQzbdHbuoI6HLuSQxcQkppUQh5TiTTnoLfw/exec?matriculas=" + encodeURIComponent(matricula);
+
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Error en la respuesta del servidor");
+        const text = await response.text();
+        document.getElementById("resultado").textContent = text;
+      } catch (err) {
+        console.error("Error:", err);
+        document.getElementById("resultado").textContent = "❌ Error al consultar. Revisa la consola (F12).";
+      }
     });
   </script>
 </body>
